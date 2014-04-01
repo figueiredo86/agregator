@@ -13,3 +13,10 @@ também setando o mac addres como indisponível nas tabelas ip_phone e device
 ## Importante
 
 Para isso acontecer, as tabelas ip_phone e device precisam estar corretamente preenchidas
+
+
+Targets para as próximas versões:
+
+1) Dividir as pastas, contento os diretórios necessários para cada item: configurações, scripts, controle de banco de dados
+
+2) Criar tabelas com os principais arquivos de configurações e relaciona-los (sip, plano de discagem, conferencia,voicemail,filas,etc)

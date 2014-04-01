@@ -1,7 +1,6 @@
 #!/usr/bin/perl -w
 
-eval 'require "/root/projetos/perl/yealink_provisioner/gen_sip.pl"';
-eval 'require "/root/projetos/perl/yealink_provisioner/gen_provisioning.pl"';
+eval 'require "/root/projetos/perl/agregator/gen_files.pl"';
 
 sub main {
  &load_modules();
@@ -19,7 +18,7 @@ sub load_modules {
 
 sub properties {
  $cfg = Config::Tiny->new;
- $cfg = Config::Tiny->read("/root/projetos/perl/yealink_provisioner/properties.ini");
+ $cfg = Config::Tiny->read("/root/projetos/perl/agregator/properties.ini");
  
  #Definicao de variaveis para o banco de dados
  $db_name = $cfg->{db}->{name};
@@ -77,9 +76,8 @@ sub get_details {
 
   $add_user->execute();
   $setmac_unavail->execute();
-  
-  @user_data=&create_sip_file();
-  &create_prov_file(@user_data);
+ 
+  &create_files(); 
  }
  close "arquivo";
 }
@@ -94,8 +92,8 @@ sub close_dbconnection {
 
 sub move_cfg_files {
  print "Movendo os arquivos de provisionamento para o diretório: " .$cfg->{tftp}->{path}. "\n";
- @path_content=system("ls","/root/projetos/perl/yealink_provisioner/*.cfg");
- system("cp",'/root/projetos/perl/yealink_provisioner/*.cfg',"$cfg->{tftp}->{path}");
+ @path_content=system("ls","/root/projetos/perl/agregator/*.cfg");
+ system("cp",'/root/projetos/perl/agregator/*.cfg',"$cfg->{tftp}->{path}");
  print "Cópia realizada com sucesso. Ambiente pronto para o provisionamento.\nObrigado.\n\n"
 };
 

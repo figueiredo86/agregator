@@ -79,6 +79,19 @@ create table device (
  unique (model)
 );
 
+drop table if exists queue;
+create table queue (
+ id int(10) not null auto_increment,
+ name varchar(100) not null,
+ company_id int(10) not null default "0",
+ announce varchar(100) not null default "60",
+ joinempty varchar(10) not null default "yes",
+ leavewhenempty varchar(10) not null default "yes",
+ musicclass varchar(100) not null default "default",
+ strategy varchar(100) not null default "rrmemory",
+ primary key (id),
+);
+
 alter table company
  add constraint fk_company_product_id
  foreign key (product_id)
@@ -103,6 +116,11 @@ alter table device
  add constraint fk_device_available
  foreign key (available) 
  references ip_phone (available);
+
+alter table queue
+ add constraint fk_queue_company_ud
+ foreign key (company_id)
+ references company (id);
 
 insert into company values (
  '',
@@ -146,6 +164,15 @@ insert into ip_phone values (
  1,
  '',
  '0015655f35c9',
+ 1,
+ null
+);
+
+insert into ip_phone values (
+ '',
+ 1,
+ '',
+ '0015655f35c5',
  1,
  null
 );
