@@ -89,7 +89,7 @@ create table queue (
  leavewhenempty varchar(10) not null default "yes",
  musicclass varchar(100) not null default "default",
  strategy varchar(100) not null default "rrmemory",
- primary key (id),
+ primary key (id)
 );
 
 alter table company
